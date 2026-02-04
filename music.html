@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Playlist - Our Memories 💕</title>
+    <meta name="description" content="The songs that tell our love story">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="heart">💕</span> Our Memories
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="countdown.html">Special Dates</a></li>
+                <li><a href="music.html" class="active">Music</a></li>
+                <li><a href="map.html">Our Places</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">🎵 Our Playlist</h1>
+        <p class="page-description">The soundtrack of our love story</p>
+    </header>
+
+    <!-- Music Section -->
+    <section class="section">
+        <div class="music-container">
+
+            <!-- Now Playing -->
+            <div class="music-player fade-in">
+                <img id="nowPlayingCover" class="now-playing-cover"
+                    src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300" alt="Album Cover">
+                <div class="now-playing-info">
+                    <h3 id="nowPlayingTitle">Select a Song</h3>
+                    <p id="nowPlayingArtist">From Our Playlist</p>
+                </div>
+
+                <div class="music-controls">
+                    <button id="prevBtn" title="Previous">⏮</button>
+                    <button id="playBtn" class="play-btn" title="Play">▶</button>
+                    <button id="nextBtn" title="Next">⏭</button>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-time">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Embed Player (Spotify/YouTube) -->
+            <div id="embedPlayer" class="glass-card" style="margin-bottom: 2rem; padding: 1rem; overflow: hidden;">
+                <!-- Embed content will be loaded dynamically -->
+            </div>
+
+            <!-- Playlist -->
+            <div class="playlist fade-in" style="animation-delay: 0.2s;">
+                <div class="playlist-header">
+                    <h3>💕 Our Songs</h3>
+                </div>
+                <div id="playlistItems">
+                    <!-- Songs will be loaded dynamically -->
+                </div>
+            </div>
+
+            <div id="emptyPlaylist" style="display: none; text-align: center; padding: 3rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎶</div>
+                <h3>No songs yet</h3>
+                <p>Add your favorite songs in the admin panel!</p>
+                <a href="dashboard.html" class="btn btn-primary" style="margin-top: 1rem;">Add Songs</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="heart">❤️</span> for us</p>
+    </footer>
+
+    <script src="data/memories.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/music.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Our Memories 💕</title>
+    <meta name="description" content="Beautiful photos of our memories together">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="heart">💕</span> Our Memories
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="countdown.html">Special Dates</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="map.html">Our Places</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">📸 Our Photo Gallery</h1>
+        <p class="page-description">Every picture tells a story of our love</p>
+    </header>
+
+    <!-- Gallery Grid -->
+    <section class="section">
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+
+            <div id="emptyGallery" style="display: none; text-align: center; padding: 3rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">📷</div>
+                <h3>No photos yet</h3>
+                <p>Add your first memory in the admin panel!</p>
+                <a href="dashboard.html" class="btn btn-primary" style="margin-top: 1rem;">Add Photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-caption">
+                <p id="lightboxCaption"></p>
+                <small id="lightboxDate"></small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="heart">❤️</span> for us</p>
+    </footer>
+
+    <script src="data/memories.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Our Memories 💕</title>
+    <meta name="description" content="Manage your memories">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="heart">💕</span> Our Memories
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="countdown.html">Special Dates</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="map.html">Our Places</a></li>
+                <li><a href="#" onclick="logout()" style="color: var(--accent);">Logout</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="admin-container">
+        <div class="container">
+
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>⚙️ Admin Dashboard</h1>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="dashboard-tabs">
+                <button class="dashboard-tab active" data-tab="photos">📸 Photos</button>
+                <button class="dashboard-tab" data-tab="dates">📅 Special Dates</button>
+                <button class="dashboard-tab" data-tab="songs">🎵 Songs</button>
+                <button class="dashboard-tab" data-tab="locations">📍 Locations</button>
+                <button class="dashboard-tab" data-tab="settings">⚙️ Settings</button>
+            </div>
+
+            <!-- Photos Panel -->
+            <div class="dashboard-panel active" id="photos-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>📸 Photo Gallery</h3>
+                    <button class="btn btn-primary" onclick="openModal('photo')">+ Add Photo</button>
+                </div>
+                <div id="photosList"></div>
+            </div>
+
+            <!-- Special Dates Panel -->
+            <div class="dashboard-panel" id="dates-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>📅 Special Dates</h3>
+                    <button class="btn btn-primary" onclick="openModal('date')">+ Add Date</button>
+                </div>
+                <div id="datesList"></div>
+            </div>
+
+            <!-- Songs Panel -->
+            <div class="dashboard-panel" id="songs-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>🎵 Music Playlist</h3>
+                    <button class="btn btn-primary" onclick="openModal('song')">+ Add Song</button>
+                </div>
+                <div id="songsList"></div>
+            </div>
+
+            <!-- Locations Panel -->
+            <div class="dashboard-panel" id="locations-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>📍 Locations</h3>
+                    <button class="btn btn-primary" onclick="openModal('location')">+ Add Location</button>
+                </div>
+                <div id="locationsList"></div>
+            </div>
+
+            <!-- Settings Panel -->
+            <div class="dashboard-panel" id="settings-panel">
+                <h3>⚙️ Couple Settings</h3>
+                <div class="glass-card" style="margin-top: 1.5rem;">
+                    <form id="settingsForm">
+                        <div class="form-group">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" id="name1" class="form-input" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Partner's Name</label>
+                            <input type="text" id="name2" class="form-input" placeholder="Partner's name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Relationship Start Date</label>
+                            <input type="date" id="startDate" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Anniversary Date</label>
+                            <input type="date" id="anniversary" class="form-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+
+                <div class="glass-card" style="margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem;">🔐 Change Admin Password</h4>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" id="newPassword" class="form-input" placeholder="New password">
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Add/Edit Photo Modal -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="photoModalTitle">Add Photo</h3>
+                <button class="modal-close" onclick="closeModal('photo')">&times;</button>
+            </div>
+            <form id="photoForm">
+                <input type="hidden" id="photoId">
+                <div class="form-group">
+                    <label class="form-label">Image URL</label>
+                    <input type="url" id="photoUrl" class="form-input" placeholder="https://..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Caption</label>
+                    <input type="text" id="photoCaption" class="form-input" placeholder="A beautiful memory..."
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input type="date" id="photoDate" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Photo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Date Modal -->
+    <div class="modal" id="dateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="dateModalTitle">Add Special Date</h3>
+                <button class="modal-close" onclick="closeModal('date')">&times;</button>
+            </div>
+            <form id="dateForm">
+                <input type="hidden" id="dateId">
+                <div class="form-group">
+                    <label class="form-label">Event Name</label>
+                    <input type="text" id="dateName" class="form-input" placeholder="Anniversary, Birthday..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input type="date" id="dateDate" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Icon (emoji)</label>
+                    <input type="text" id="dateIcon" class="form-input" placeholder="💕" maxlength="4">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <select id="dateType" class="form-select">
+                        <option value="anniversary">Anniversary</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="milestone">Milestone</option>
+                        <option value="holiday">Holiday</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Date</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Song Modal -->
+    <div class="modal" id="songModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="songModalTitle">Add Song</h3>
+                <button class="modal-close" onclick="closeModal('song')">&times;</button>
+            </div>
+            <form id="songForm">
+                <input type="hidden" id="songId">
+                <div class="form-group">
+                    <label class="form-label">Song Title</label>
+                    <input type="text" id="songTitle" class="form-input" placeholder="Perfect" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Artist</label>
+                    <input type="text" id="songArtist" class="form-input" placeholder="Ed Sheeran" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cover Image URL</label>
+                    <input type="url" id="songCover" class="form-input" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Duration</label>
+                    <input type="text" id="songDuration" class="form-input" placeholder="4:23">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Spotify Embed URL (optional)</label>
+                    <input type="url" id="songEmbed" class="form-input"
+                        placeholder="https://open.spotify.com/embed/track/...">
+                    <small style="color: var(--text-light);">Go to Spotify → Share → Embed → Copy embed URL</small>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Song</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Location Modal -->
+    <div class="modal" id="locationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="locationModalTitle">Add Location</h3>
+                <button class="modal-close" onclick="closeModal('location')">&times;</button>
+            </div>
+            <form id="locationForm">
+                <input type="hidden" id="locationId">
+                <div class="form-group">
+                    <label class="form-label">Place Name</label>
+                    <input type="text" id="locationName" class="form-input" placeholder="Our favorite café" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea id="locationDescription" class="form-textarea"
+                        placeholder="Where we had our first date..."></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Latitude</label>
+                        <input type="number" step="any" id="locationLat" class="form-input" placeholder="10.7769"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Longitude</label>
+                        <input type="number" step="any" id="locationLng" class="form-input" placeholder="106.7009"
+                            required>
+                    </div>
+                </div>
+                <small style="color: var(--text-light); display: block; margin-bottom: 1rem;">
+                    💡 Tip: Right-click on Google Maps → "What's here?" to get coordinates
+                </small>
+                <div class="form-group">
+                    <label class="form-label">Date Visited</label>
+                    <input type="date" id="locationDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Icon (emoji)</label>
+                    <input type="text" id="locationIcon" class="form-input" placeholder="📍" maxlength="4">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Location</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="data/memories.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

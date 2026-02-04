@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories 💕</title>
+    <meta name="description" content="A beautiful collection of our memories together">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="heart">💕</span> Our Memories
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="countdown.html">Special Dates</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="map.html">Our Places</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">Our Love Story 💕</h1>
+            <p class="hero-subtitle">Every moment with you is a memory I treasure forever</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="daysTogether">0</div>
+                    <div class="stat-label">Days Together</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="photoCount">0</div>
+                    <div class="stat-label">Memories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="placeCount">0</div>
+                    <div class="stat-label">Places Visited</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="gallery.html" class="btn btn-primary">
+                    📸 View Gallery
+                </a>
+                <a href="countdown.html" class="btn btn-secondary">
+                    ⏰ Special Dates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Memories</h2>
+                <p class="section-subtitle">Explore our journey together through photos, places, and special moments</p>
+            </div>
+
+            <div class="grid grid-4" id="featuresGrid">
+                <a href="gallery.html" class="glass-card" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📸</div>
+                    <h4>Photo Gallery</h4>
+                    <p>Browse through our beautiful memories captured in photos</p>
+                </a>
+
+                <a href="countdown.html" class="glass-card" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
+                    <h4>Special Dates</h4>
+                    <p>Countdown to our anniversaries and special moments</p>
+                </a>
+
+                <a href="music.html" class="glass-card" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎵</div>
+                    <h4>Our Playlist</h4>
+                    <p>Listen to the songs that define our love story</p>
+                </a>
+
+                <a href="map.html" class="glass-card" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
+                    <h4>Our Places</h4>
+                    <p>Explore the places where we made memories</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Photos Preview -->
+    <section class="section" style="background: rgba(255, 182, 193, 0.1);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recent Memories</h2>
+                <p class="section-subtitle">Our latest captured moments</p>
+            </div>
+
+            <div class="gallery-grid" id="recentPhotos" style="max-width: 1000px; margin: 0 auto;">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="gallery.html" class="btn btn-primary">View All Photos →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="heart">❤️</span> for us</p>
+    </footer>
+
+    <script src="data/memories.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

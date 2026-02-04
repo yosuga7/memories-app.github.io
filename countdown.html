@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Dates - Our Memories 💕</title>
+    <meta name="description" content="Countdown to our special dates and milestones">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏰</text></svg>">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="heart">💕</span> Our Memories
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="countdown.html" class="active">Special Dates</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="map.html">Our Places</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">⏰ Special Dates</h1>
+        <p class="page-description">Every moment with you is worth counting</p>
+    </header>
+
+    <!-- Countdown Section -->
+    <section class="section">
+        <div class="countdown-container">
+
+            <!-- Days Together Counter -->
+            <div class="days-together fade-in">
+                <div class="days-together-number" id="daysTogether">0</div>
+                <div class="days-together-label">Days Together 💕</div>
+            </div>
+
+            <!-- Anniversary Countdown -->
+            <div class="countdown-main fade-in" style="animation-delay: 0.2s;">
+                <h2 class="countdown-title">Next Anniversary In</h2>
+                <div class="countdown-display" id="anniversaryCountdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countDays">0</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countHours">0</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countMinutes">0</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countSeconds">0</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Dates List -->
+            <div style="width: 100%; max-width: 1000px;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--accent);">🎉 Upcoming Special Dates
+                </h3>
+                <div class="special-dates-list" id="specialDatesList">
+                    <!-- Dates will be loaded dynamically -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="heart">❤️</span> for us</p>
+    </footer>
+
+    <script src="data/memories.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/countdown.js"></script>
+</body>
+
+</html>
