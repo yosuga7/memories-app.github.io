@@ -139,8 +139,29 @@
             <form id="photoForm">
                 <input type="hidden" id="photoId">
                 <div class="form-group">
-                    <label class="form-label">Image URL</label>
-                    <input type="url" id="photoUrl" class="form-input" placeholder="https://..." required>
+                    <label class="form-label">Image Source</label>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="radio" name="photoType" value="url" checked onchange="togglePhotoInput('url')">
+                            URL
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="radio" name="photoType" value="file" onchange="togglePhotoInput('file')">
+                            Upload File
+                        </label>
+                    </div>
+
+                    <div id="photoUrlGroup">
+                        <input type="url" id="photoUrl" class="form-input" placeholder="https://...">
+                    </div>
+
+                    <div id="photoFileGroup" style="display: none;">
+                        <input type="file" id="photoFile" class="form-input" accept="image/*">
+                        <div id="photoPreview"
+                            style="margin-top: 0.5rem; max-width: 100px; max-height: 100px; overflow: hidden; border-radius: 8px; display: none;">
+                            <img src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Caption</label>

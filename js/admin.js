@@ -3,6 +3,8 @@
 // CRUD operations for all content types
 // ========================================
 
+let currentPhotoBase64 = null;
+
 document.addEventListener('DOMContentLoaded', function () {
     // Check authentication
     if (!isLoggedIn()) {
@@ -267,17 +269,41 @@ function loadSettings() {
 
 function initForms() {
     // Photo Form
+    const photoFile = document.getElementById('photoFile');
+    if (photoFile) {
+        photoFile.addEventListener('change', handleFileSelect);
+    }
+
     document.getElementById('photoForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
+        const photoType = document.querySelector('input[name="photoType"]:checked').value;
+        let url = document.getElementById('photoUrl').value;
+
+        // Use uploaded file if selected
+        if (photoType === 'file' && currentPhotoBase64) {
+            url = currentPhotoBase64;
+        } else if (photoType === 'file' && !currentPhotoBase64 && !document.getElementById('photoId').value) {
+            showToast('Please select a photo', 'error');
+            return;
+        }
+
         const id = document.getElementById('photoId').value;
         const data = {
-            url: document.getElementById('photoUrl').value,
+            url: url,
             caption: document.getElementById('photoCaption').value,
             date: document.getElementById('photoDate').value
         };
 
         if (id) {
+            // If editing and no new file selected, preserve existing URL
+            if (photoType === 'file' && !currentPhotoBase64) {
+                // Keep original URL (handled by not updating if undefined, but here we need logic)
+                // Actually, retrieve existing photo to check?
+                const existing = getPhotos().find(p => p.id === parseInt(id));
+                if (existing) data.url = existing.url;
+            }
+
             updatePhoto(parseInt(id), data);
             showToast('Photo updated successfully');
         } else {
@@ -287,6 +313,11 @@ function initForms() {
 
         closeModal('photo');
         loadPhotosList();
+
+        // Reset
+        currentPhotoBase64 = null;
+        document.getElementById('photoPreview').style.display = 'none';
+        document.getElementById('photoFile').value = '';
     });
 
     // Date Form
@@ -453,3 +484,89 @@ document.addEventListener('keydown', function (e) {
         });
     }
 });
+
+// ========================================
+// FILE UPLOAD HELPERS
+// ========================================
+
+// Toggle between URL and File input
+function togglePhotoInput(type) {
+    const urlGroup = document.getElementById('photoUrlGroup');
+    const fileGroup = document.getElementById('photoFileGroup');
+
+    if (type === 'url') {
+        urlGroup.style.display = 'block';
+        fileGroup.style.display = 'none';
+        currentPhotoBase64 = null;
+    } else {
+        urlGroup.style.display = 'none';
+        fileGroup.style.display = 'block';
+    }
+}
+
+// Handle file selection
+function handleFileSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.match('image.*')) {
+        showToast('Please select an image file', 'error');
+        return;
+    }
+
+    // Preview
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const preview = document.getElementById('photoPreview');
+        preview.style.display = 'block';
+        preview.querySelector('img').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    // Compress and store
+    showToast('Compressing image...', 'info');
+    compressImage(file, 0.5, function (base64) {
+        currentPhotoBase64 = base64;
+        showToast('Image ready for upload');
+    });
+}
+
+// Compress image to avoid localStorage limits
+function compressImage(file, maxSizeMB, callback) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            // Resize if too large (max 1200px width)
+            const MAX_WIDTH = 1200;
+            if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Start with quality 0.7
+            let quality = 0.7;
+            let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+            // Reduce quality if still too large (approximate check)
+            while (dataUrl.length > maxSizeMB * 1024 * 1024 && quality > 0.1) {
+                quality -= 0.1;
+                dataUrl = canvas.toDataURL('image/jpeg', quality);
+            }
+
+            callback(dataUrl);
+        };
+    };
+}
